@@ -20,7 +20,6 @@ import org.mp4parser.support.AbstractFullBox;
 import org.mp4parser.tools.IsoTypeReader;
 import org.mp4parser.tools.IsoTypeWriter;
 
-import java.awt.*;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
