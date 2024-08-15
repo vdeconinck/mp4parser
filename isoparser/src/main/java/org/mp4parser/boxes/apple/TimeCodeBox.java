@@ -51,7 +51,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
 
     @Override
     protected long getContentSize() {
-        return 8 + 4 + 4 + 4 + 4 + 1 + 3 + rest.length;
+        return 8 + 4 + 4 + 4 + 4 + 1 + 1 + rest.length;
 
     }
 
@@ -64,7 +64,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
         bb.putInt(timeScale);
         bb.putInt(frameDuration);
         IsoTypeWriter.writeUInt8(bb, numberOfFrames);
-        IsoTypeWriter.writeUInt24(bb, reserved2);
+        IsoTypeWriter.writeUInt8(bb, reserved2);
         bb.put(rest);
 
     }
@@ -80,7 +80,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
         timeScale = content.getInt();
         frameDuration = content.getInt();
         numberOfFrames = IsoTypeReader.readUInt8(content);
-        reserved2 = IsoTypeReader.readUInt24(content);
+        reserved2 = IsoTypeReader.readUInt8(content);
         rest = new byte[content.remaining()];
         content.get(rest);
     }
