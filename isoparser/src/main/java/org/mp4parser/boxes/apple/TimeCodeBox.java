@@ -40,7 +40,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
     int numberOfFrames;
     int reserved1;
     int reserved2;
-    long flags;
+    long lFlags; // Timecode flags
     int dataReferenceIndex;
     byte[] rest = new byte[0];
 
@@ -60,7 +60,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
         bb.put(new byte[]{0, 0, 0, 0, 0, 0});
         IsoTypeWriter.writeUInt16(bb, dataReferenceIndex);
         bb.putInt(reserved1);
-        IsoTypeWriter.writeUInt32(bb, flags);
+        IsoTypeWriter.writeUInt32(bb, lFlags);
         bb.putInt(timeScale);
         bb.putInt(frameDuration);
         IsoTypeWriter.writeUInt8(bb, numberOfFrames);
@@ -75,7 +75,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
         ((Buffer)content).position(6);// ignore 6 reserved bytes;
         dataReferenceIndex = IsoTypeReader.readUInt16(content);   // 8
         reserved1 = content.getInt();
-        flags = IsoTypeReader.readUInt32(content);
+        lFlags = IsoTypeReader.readUInt32(content);
 
         timeScale = content.getInt();
         frameDuration = content.getInt();
@@ -102,7 +102,7 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
                 ", numberOfFrames=" + numberOfFrames +
                 ", reserved1=" + reserved1 +
                 ", reserved2=" + reserved2 +
-                ", flags=" + flags +
+                ", lFlags=" + lFlags +
                 '}';
     }
 
@@ -146,12 +146,12 @@ public class TimeCodeBox extends AbstractBox implements SampleEntry, Container {
         this.reserved2 = reserved2;
     }
 
-    public long getFlags() {
-        return flags;
+    public long getLFlags() {
+        return lFlags;
     }
 
-    public void setFlags(long flags) {
-        this.flags = flags;
+    public void setLFlags(long lFlags) {
+        this.lFlags = lFlags;
     }
 
     public byte[] getRest() {
